@@ -1,0 +1,9 @@
+3
+Alexandrescu 20000000 99999
+Frank 100000 50
+Andy 1 1
+4
+Andy 100 200
+Anna 400 9999
+Lipp 200 200
+Stan 500 200
