@@ -1,0 +1,9 @@
+NewSttudent John B10415000
+AddCourse Math 0
+AddCourse English 0
+RemoveCourse Math
+Print
+AddCourse Math 100
+Print
+Remove C++
+Exit

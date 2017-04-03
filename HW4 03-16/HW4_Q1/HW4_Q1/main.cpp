@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
@@ -8,6 +7,7 @@ void CountNOrder(int *years, const int Count)
 	double NOrder = log2(2);
 	int CurrentOrder = 3;
 	double CPU = 4;
+
 	for (int i = 0; i < Count; i++)
 	{
 		while (NOrder <= CPU)
@@ -33,7 +33,7 @@ int main()
 		// 預計要次方的間隔
 		int CountYear = num / 10 - 190;
 		cout << years[CountYear] << endl;
-
 	}
+	getchar();
 	return 0;
 }

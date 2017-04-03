@@ -1,0 +1,9 @@
+AddStudent Wang B10415000 chen A10415033
+AddCourse chen math 60 C_Pro 30 C++_Pro 60
+ModifyCourse Chen math 60 C_Pro 0
+ModifyCourse Wang math 30
+ModifyCourese chen math 80
+Search chen
+Search A10415033
+Search All
+Exit
