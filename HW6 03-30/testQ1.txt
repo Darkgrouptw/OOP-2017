@@ -1,0 +1,8 @@
+Create P1 100
+Print P1
+Test P1
+Test P2
+Destroy P1
+Test P1
+Print P1
+Exit
