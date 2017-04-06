@@ -1,2 +1,8 @@
-﻿  DirectoryManager.cpp
+﻿  Moc'ing CheckerThead.h...
+  CheckerThead.cpp
+  DirectoryManager.cpp
+  moc_CheckerThead.cpp
+  main.cpp
+  ReportManager.cpp
+  正在產生程式碼...
   OOP Checker.vcxproj -> C:\Users\Dark\Desktop\SourceTree\OOP-2017\OOP Checker\x64\Release\OOP Checker.exe

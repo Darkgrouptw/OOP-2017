@@ -15,6 +15,10 @@ void ReportManager::SetFileRoot(QString root)
 {
 	this->FileRoot = root;
 }
+void ReportManager::SetCurrentWeek(int week)
+{
+	this->week = week;
+}
 void ReportManager::AddCurrentFile(QString tempCheck)
 {
 	CurrentFileList.push_back(tempCheck);
@@ -34,6 +38,9 @@ void ReportManager::AddWrongFile(QString tempWrong)
 
 void ReportManager::PrintReport()
 {
+	cout << "Week" << QString::number(week).rightJustified(2, '0').toStdString() << endl;
+	cout << "Total =>" << (CurrentFileList.length() + IgnoreFileList.length() + PastFileList.length() + WrongFileList.length()) << endl;
+
 	cout << "========== Current File ==========" << endl;
 	cout << "Size => " << CurrentFileList.length() << endl;
 	for (int i = 0; i < CurrentFileList.length(); i++)

@@ -20,6 +20,14 @@ int main(int argv, char ** argc)
 	QVector<QString>	FileList;
 	#pragma endregion
 	#pragma region 開始檢查目錄
+	QString filePath(argc[1]);
+	QDir dir(filePath);
+	if (!dir.exists())
+	{
+		cout << "資料夾不存在!!" << endl;
+		return 0;
+	}
+
 	FileList = DirectoryManager::FindAllFileInDirectory(rm, QString(argc[1]));
 	#pragma endregion
 	rm->PrintReport();
