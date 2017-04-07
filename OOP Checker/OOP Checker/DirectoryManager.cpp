@@ -9,6 +9,11 @@ QVector<QString> DirectoryManager::FindAllFileInDirectory(ReportManager *rm, QSt
 	// 刪除 . & .. (前面兩個)
 	strList.removeAt(1);
 	strList.removeAt(0);
+	
+	// 刪除產生出來的東西
+	for (int i = strList.length() - 1; i >= 0; i--)
+		if (strList[i] == "Current Files")
+			strList.removeAt(i);
 
 	int week = filePath.mid(4, 2).toInt();
 	rm->SetCurrentWeek(week);
@@ -30,7 +35,7 @@ QVector<QString> DirectoryManager::FindAllFileInDirectory(ReportManager *rm, QSt
 		currentList.push_back(strList[i]);
 	}
 
-#pragma region 判斷 Current 的 Ignore 部分
+	#pragma region 判斷 Current 的 Ignore 部分
 	QVector<QString> *noignoreList = new QVector<QString>();
 	QVector<QString> *ignoreList = new QVector<QString>();
 	GetLatestVersionFile(currentList, noignoreList, ignoreList);
@@ -38,8 +43,8 @@ QVector<QString> DirectoryManager::FindAllFileInDirectory(ReportManager *rm, QSt
 		rm->AddCurrentFile((*noignoreList)[i]);
 	for (int i = 0; i < ignoreList->length(); i++)
 		rm->AddIgnoreFile((*ignoreList)[i]);
-#pragma endregion
-#pragma region 判斷 Past 的 Ignore 部分
+	#pragma endregion
+	#pragma region 判斷 Past 的 Ignore 部分
 	(*noignoreList).clear();
 	(*ignoreList).clear();
 	GetLatestVersionFile(pastList, noignoreList, ignoreList);
@@ -47,10 +52,38 @@ QVector<QString> DirectoryManager::FindAllFileInDirectory(ReportManager *rm, QSt
 		rm->AddPastFile((*noignoreList)[i]);
 	for (int i = 0; i < ignoreList->length(); i++)
 		rm->AddIgnoreFile((*ignoreList)[i]);
-#pragma endregion
+	#pragma endregion
 	return list;
 }
+void DirectoryManager::UnzipFile(ReportManager *rm, QString filePath)
+{
+	QVector<QString> tempVector = rm->GetCurrentFileList();
+	QString ZipFile, UnzipFile, commond;
 
+	// 新增一個 Current Files 的資料夾
+	QDir dir(filePath + "/Current Files");
+	if (dir.exists())																				// 刪除之前改過的資料
+		dir.removeRecursively();
+
+	QThread::sleep(1);																				// 怕刪除的時候有衝突，所以等待一下在加
+	dir.mkdir("./");
+
+	for (int i = 0; i < tempVector.length(); i++)
+	{
+		ZipFile = filePath + "/" + tempVector[i];
+		UnzipFile = filePath + "/Current Files/" + tempVector[i].split(".")[0].split("_")[0];
+
+		dir = QDir(UnzipFile);
+		if (!dir.exists())
+			dir.mkdir("./");
+
+		commond = "Tools/Winrar.exe x -ibck \"" + ZipFile + "\" *.* \"" + UnzipFile + "\"";
+		QProcess process;
+		process.start(commond);
+		process.waitForFinished(5000);
+		process.close();
+	}
+}
 bool DirectoryManager::CheckIsCorrectFile(QString &fileName, QString filePath, int week)
 {
 	// 第一個字為 B or b

@@ -9,8 +9,6 @@ using namespace std;
 class ReportManager
 {
 public:
-	ReportManager();
-	~ReportManager();
 
 	void				SetFileRoot(QString);														// 設定檔案的 root 位置
 	void				SetCurrentWeek(int);														// 設定今天第幾周
@@ -19,7 +17,13 @@ public:
 	void				AddPastFile(QString);														// 增加 Past File
 	void				AddWrongFile(QString);														// 增加 Wrong File
 
-	void				PrintReport();																// 把所有的 Report 印出來
+	// 拿資料
+	QVector<QString>	GetCurrentFileList();														
+	QVector<QString>	GetIgnoreFileList();
+	QVector<QString>	GetPastFileList();
+	QVector<QString>	GetWrongFileList();
+
+	void				PrintFileReport();															// 把檔案的 Report 印出來
 private:
 	int					week;																		// 這周第幾周
 	QString				FileRoot;																	// 現在這一周的檔案位置

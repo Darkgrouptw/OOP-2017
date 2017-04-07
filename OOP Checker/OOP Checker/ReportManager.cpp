@@ -1,16 +1,5 @@
 #include "ReportManager.h"
 
-
-
-ReportManager::ReportManager()
-{
-}
-
-
-ReportManager::~ReportManager()
-{
-}
-
 void ReportManager::SetFileRoot(QString root)
 {
 	this->FileRoot = root;
@@ -36,7 +25,24 @@ void ReportManager::AddWrongFile(QString tempWrong)
 	this->WrongFileList.push_back(tempWrong);
 }
 
-void ReportManager::PrintReport()
+QVector<QString> ReportManager::GetCurrentFileList()
+{
+	return this->CurrentFileList;
+}
+QVector<QString> ReportManager::GetIgnoreFileList()
+{
+	return this->IgnoreFileList;
+}
+QVector<QString> ReportManager::GetPastFileList()
+{
+	return this->PastFileList;
+}
+QVector<QString> ReportManager::GetWrongFileList()
+{
+	return this->WrongFileList;
+}
+
+void ReportManager::PrintFileReport()
 {
 	cout << "Week" << QString::number(week).rightJustified(2, '0').toStdString() << endl;
 	cout << "Total =>" << (CurrentFileList.length() + IgnoreFileList.length() + PastFileList.length() + WrongFileList.length()) << endl;

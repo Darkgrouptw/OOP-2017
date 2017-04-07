@@ -29,8 +29,12 @@ int main(int argv, char ** argc)
 	}
 
 	FileList = DirectoryManager::FindAllFileInDirectory(rm, QString(argc[1]));
+	rm->PrintFileReport();
 	#pragma endregion
-	rm->PrintReport();
+	#pragma region 解壓縮到改的目錄
+	DirectoryManager::UnzipFile(rm, filePath);
+	#pragma endregion
+
 	return 0;
 }
 /*QProcess exe;
